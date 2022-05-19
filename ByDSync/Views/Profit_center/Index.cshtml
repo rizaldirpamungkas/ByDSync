@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ByDSync.Schema.profit_center>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Profit Center</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Sync Data", "Synchronize")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.profit_center_uuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profit_center_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.org_center_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.for_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.for_post)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.manager_pos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.manager_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.profit_center_uuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profit_center_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profit_center_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.org_center_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.for_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.for_post)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.manager_pos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.manager_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.C_uid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.C_uid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.C_uid })
+        </td>
+    </tr>
+}
+
+</table>

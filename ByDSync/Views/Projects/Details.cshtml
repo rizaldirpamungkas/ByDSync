@@ -1,0 +1,138 @@
+﻿@model ByDSync.Schema.project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.project_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project_uuid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_uuid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.projActStaDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projActStaDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.projActEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projActEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proj_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proj_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost_ctr_id_respunit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost_ctr_id_respunit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost_center_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost_center_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.risk_level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.risk_level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.onhold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.onhold)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.C_uid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

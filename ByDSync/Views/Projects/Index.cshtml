@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ByDSync.Schema.project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Projects</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Sync Data", "Synchronize")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.project_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_uuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projActStaDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projActEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proj_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost_ctr_id_respunit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost_center_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost_center_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.risk_level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.onhold)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_uuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projActStaDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projActEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proj_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profit_center_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost_ctr_id_respunit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost_center_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost_center_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.risk_level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.onhold)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.C_uid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.C_uid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.C_uid })
+        </td>
+    </tr>
+}
+
+</table>

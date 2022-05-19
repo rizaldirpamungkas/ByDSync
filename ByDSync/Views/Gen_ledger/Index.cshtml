@@ -1,0 +1,166 @@
+﻿@model IEnumerable<ByDSync.Schema.gen_ledger>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>General Ledger</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Sync Data", "Synchronize")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.created_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changed_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jour_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jour_item_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jour_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bus_part_addr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.chart_of_act)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cus_code1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cus_code2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cus_code3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.debit_credit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fiscal_year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gl_acct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gl_acct_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prod_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comp_cur_amt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.item_cur_amt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tran_cur_amt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.val_qty_unt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.changed_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jour_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jour_item_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jour_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bus_part_addr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.chart_of_act)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cus_code1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cus_code2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cus_code3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.debit_credit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fiscal_year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gl_acct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gl_acct_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profit_center_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prod_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comp_cur_amt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item_cur_amt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tran_cur_amt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.val_qty_unt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.C_uid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.C_uid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.C_uid })
+        </td>
+    </tr>
+}
+
+</table>

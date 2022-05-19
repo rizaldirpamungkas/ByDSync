@@ -1,0 +1,88 @@
+﻿@model ByDSync.Schema.profit_center
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>profit_center</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_uuid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_uuid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.for_plan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.for_plan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.for_post)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.for_post)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manager_pos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manager_pos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manager_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manager_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

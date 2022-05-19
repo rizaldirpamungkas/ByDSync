@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ByDMirrorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="gen_ledger">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="created_date" Type="date" />
+          <Property Name="changed_date" Type="date" />
+          <Property Name="jour_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="jour_item_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="jour_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="bus_part_addr" Type="nvarchar" MaxLength="300" />
+          <Property Name="chart_of_act" Type="nvarchar" MaxLength="20" />
+          <Property Name="cus_code1" Type="nvarchar" MaxLength="50" />
+          <Property Name="cus_code2" Type="nvarchar" MaxLength="50" />
+          <Property Name="cus_code3" Type="nvarchar" MaxLength="50" />
+          <Property Name="debit_credit" Type="int" />
+          <Property Name="employee_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="gl_acct" Type="nvarchar" MaxLength="15" />
+          <Property Name="gl_acct_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="project_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="profit_center_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="post_date" Type="date" />
+          <Property Name="prod_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="comp_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="item_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="tran_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="val_qty_unt" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="journal_entries">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="gl_act" Type="nvarchar" MaxLength="20" />
+          <Property Name="gl_acct_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="created_date" Type="date" />
+          <Property Name="changed_date" Type="date" />
+          <Property Name="posting_date" Type="date" />
+          <Property Name="jour_id" Type="nvarchar" MaxLength="100" />
+          <Property Name="debit_credit" Type="int" />
+          <Property Name="fiscal_year" Type="int" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="100" />
+          <Property Name="changed_by" Type="nvarchar" MaxLength="100" />
+          <Property Name="comp_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="item_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="tran_cur_amt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="jour_number" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="profit_center">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="profit_center_uuid" Type="nvarchar" MaxLength="100" />
+          <Property Name="profit_center_id" Type="nvarchar" MaxLength="30" />
+          <Property Name="profit_center_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="org_center_id" Type="nvarchar" MaxLength="30" />
+          <Property Name="for_plan" Type="int" />
+          <Property Name="for_post" Type="int" />
+          <Property Name="manager_pos" Type="nvarchar" MaxLength="100" />
+          <Property Name="manager_id" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="project_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="project_uuid" Type="nvarchar" MaxLength="100" />
+          <Property Name="project_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="projActStaDate" Type="date" />
+          <Property Name="projActEndDate" Type="date" />
+          <Property Name="proj_desc" Type="nvarchar" MaxLength="200" />
+          <Property Name="profit_center_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="cost_ctr_id_respunit" Type="nvarchar" MaxLength="50" />
+          <Property Name="cost_center_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="cost_center_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="company" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="risk_level" Type="nvarchar" MaxLength="20" />
+          <Property Name="onhold" Type="int" />
+        </EntityType>
+        <EntityContainer Name="ByDMirrorModelStoreContainer">
+          <EntitySet Name="gen_ledger" EntityType="Self.gen_ledger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="journal_entries" EntityType="Self.journal_entries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profit_center" EntityType="Self.profit_center" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ByDMirrorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="gen_ledger">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_date" Type="DateTime" Precision="0" />
+          <Property Name="changed_date" Type="DateTime" Precision="0" />
+          <Property Name="jour_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jour_item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jour_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="bus_part_addr" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="chart_of_act" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cus_code1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cus_code2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cus_code3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="debit_credit" Type="Int32" />
+          <Property Name="employee_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="gl_acct" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="gl_acct_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="project_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="profit_center_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="post_date" Type="DateTime" Precision="0" />
+          <Property Name="prod_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="comp_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="item_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="tran_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="val_qty_unt" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="journal_entries">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gl_act" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="gl_acct_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="created_date" Type="DateTime" Precision="0" />
+          <Property Name="changed_date" Type="DateTime" Precision="0" />
+          <Property Name="posting_date" Type="DateTime" Precision="0" />
+          <Property Name="jour_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="debit_credit" Type="Int32" />
+          <Property Name="fiscal_year" Type="Int32" />
+          <Property Name="created_by" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="changed_by" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="comp_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="item_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="tran_cur_amt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="jour_number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="profit_center">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="profit_center_uuid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="profit_center_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="profit_center_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="org_center_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="for_plan" Type="Int32" />
+          <Property Name="for_post" Type="Int32" />
+          <Property Name="manager_pos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="manager_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="project_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="project_uuid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="project_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projActStaDate" Type="DateTime" Precision="0" />
+          <Property Name="projActEndDate" Type="DateTime" Precision="0" />
+          <Property Name="proj_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="profit_center_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost_ctr_id_respunit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost_center_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost_center_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="risk_level" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="onhold" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="ByDMirrorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="gen_ledger" EntityType="Self.gen_ledger" />
+          <EntitySet Name="journal_entries" EntityType="Self.journal_entries" />
+          <EntitySet Name="profit_center" EntityType="Self.profit_center" />
+          <EntitySet Name="projects" EntityType="Self.project" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ByDMirrorModelStoreContainer" CdmEntityContainer="ByDMirrorEntities">
+          <EntitySetMapping Name="gen_ledger">
+            <EntityTypeMapping TypeName="ByDMirrorModel.gen_ledger">
+              <MappingFragment StoreEntitySet="gen_ledger">
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="jour_id" ColumnName="jour_id" />
+                <ScalarProperty Name="jour_item_id" ColumnName="jour_item_id" />
+                <ScalarProperty Name="jour_type" ColumnName="jour_type" />
+                <ScalarProperty Name="bus_part_addr" ColumnName="bus_part_addr" />
+                <ScalarProperty Name="chart_of_act" ColumnName="chart_of_act" />
+                <ScalarProperty Name="cus_code1" ColumnName="cus_code1" />
+                <ScalarProperty Name="cus_code2" ColumnName="cus_code2" />
+                <ScalarProperty Name="cus_code3" ColumnName="cus_code3" />
+                <ScalarProperty Name="debit_credit" ColumnName="debit_credit" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="gl_acct" ColumnName="gl_acct" />
+                <ScalarProperty Name="gl_acct_type" ColumnName="gl_acct_type" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="profit_center_id" ColumnName="profit_center_id" />
+                <ScalarProperty Name="post_date" ColumnName="post_date" />
+                <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+                <ScalarProperty Name="comp_cur_amt" ColumnName="comp_cur_amt" />
+                <ScalarProperty Name="item_cur_amt" ColumnName="item_cur_amt" />
+                <ScalarProperty Name="tran_cur_amt" ColumnName="tran_cur_amt" />
+                <ScalarProperty Name="val_qty_unt" ColumnName="val_qty_unt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="journal_entries">
+            <EntityTypeMapping TypeName="ByDMirrorModel.journal_entries">
+              <MappingFragment StoreEntitySet="journal_entries">
+                <ScalarProperty Name="jour_number" ColumnName="jour_number" />
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+                <ScalarProperty Name="gl_act" ColumnName="gl_act" />
+                <ScalarProperty Name="gl_acct_type" ColumnName="gl_acct_type" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="posting_date" ColumnName="posting_date" />
+                <ScalarProperty Name="jour_id" ColumnName="jour_id" />
+                <ScalarProperty Name="debit_credit" ColumnName="debit_credit" />
+                <ScalarProperty Name="fiscal_year" ColumnName="fiscal_year" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="changed_by" ColumnName="changed_by" />
+                <ScalarProperty Name="comp_cur_amt" ColumnName="comp_cur_amt" />
+                <ScalarProperty Name="item_cur_amt" ColumnName="item_cur_amt" />
+                <ScalarProperty Name="tran_cur_amt" ColumnName="tran_cur_amt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profit_center">
+            <EntityTypeMapping TypeName="ByDMirrorModel.profit_center">
+              <MappingFragment StoreEntitySet="profit_center">
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+                <ScalarProperty Name="profit_center_uuid" ColumnName="profit_center_uuid" />
+                <ScalarProperty Name="profit_center_id" ColumnName="profit_center_id" />
+                <ScalarProperty Name="profit_center_name" ColumnName="profit_center_name" />
+                <ScalarProperty Name="org_center_id" ColumnName="org_center_id" />
+                <ScalarProperty Name="for_plan" ColumnName="for_plan" />
+                <ScalarProperty Name="for_post" ColumnName="for_post" />
+                <ScalarProperty Name="manager_pos" ColumnName="manager_pos" />
+                <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="ByDMirrorModel.project">
+              <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_uuid" ColumnName="project_uuid" />
+                <ScalarProperty Name="project_type" ColumnName="project_type" />
+                <ScalarProperty Name="projActStaDate" ColumnName="projActStaDate" />
+                <ScalarProperty Name="projActEndDate" ColumnName="projActEndDate" />
+                <ScalarProperty Name="proj_desc" ColumnName="proj_desc" />
+                <ScalarProperty Name="profit_center_id" ColumnName="profit_center_id" />
+                <ScalarProperty Name="cost_ctr_id_respunit" ColumnName="cost_ctr_id_respunit" />
+                <ScalarProperty Name="cost_center_type" ColumnName="cost_center_type" />
+                <ScalarProperty Name="cost_center_id" ColumnName="cost_center_id" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="risk_level" ColumnName="risk_level" />
+                <ScalarProperty Name="onhold" ColumnName="onhold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

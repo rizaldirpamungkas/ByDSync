@@ -1,0 +1,82 @@
+﻿@model ByDSync.Schema.profit_center
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>profit_center</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_uuid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_uuid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profit_center_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profit_center_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.org_center_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.org_center_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.for_plan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.for_plan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.for_post)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.for_post)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manager_pos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manager_pos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manager_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manager_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.C_uid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
