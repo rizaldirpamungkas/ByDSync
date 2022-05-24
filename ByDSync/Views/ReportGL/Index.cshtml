@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ByDSync.Schema.ReportGL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>General Ledger Report</h2>
+
+@Html.ActionLink("Print Report", "Report")
+
+<table id="tab" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Posting_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journal_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GL_Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dr_Cr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profit_Center)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Custom_Code_3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funding_Source_1)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Posting_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Journal_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GL_Account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dr_Cr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profit_Center)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Custom_Code_3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Funding_Source_1)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#tab').DataTable({
+            columnDefs: [
+                {
+                    targets: 3,
+                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp. ')
+                }
+            ]
+        });
+    });
+</script>

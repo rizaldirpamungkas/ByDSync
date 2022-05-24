@@ -79,9 +79,7 @@ namespace ByDSync.Controllers
                 List<profit_center> profits = new List<profit_center>();
 
                 profit_center profit;
-                decimal num;
                 bool statParse, reason;
-                DateTime date;
                 int index = 0;
                 string id = "PC-";
 

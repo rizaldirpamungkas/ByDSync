@@ -83,6 +83,7 @@ namespace ByDSync.Controllers
                 decimal num;
                 bool statParse;
                 DateTime date;
+                string tanggal;
                 int index = 0;
                 string id = "JE-";
 
@@ -90,15 +91,21 @@ namespace ByDSync.Controllers
                 {
                     journal = new journal_entries();
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_SaLcDateTime").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_SaLcDateTime").ToString();
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         journal.changed_date = date;
+                    }
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_CreationDate").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_CreationDate").ToString();
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         journal.created_date = date;
+                    }
 
                     journal.changed_by = data.Value<JToken>("C_SaLcIdUuid").ToString();
                     journal.created_by = data.Value<JToken>("C_SaCrIdUuid").ToString();

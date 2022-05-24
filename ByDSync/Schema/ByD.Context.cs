@@ -29,5 +29,7 @@ namespace ByDSync.Schema
         public virtual DbSet<journal_entries> journal_entries { get; set; }
         public virtual DbSet<profit_center> profit_center { get; set; }
         public virtual DbSet<project> projects { get; set; }
+        public virtual DbSet<code_list> code_list { get; set; }
+        public virtual DbSet<ReportGL> ReportGLs { get; set; }
     }
 }

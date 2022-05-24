@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="ByDMirrorModel.journal_entries" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ByDMirrorModel.profit_center" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ByDMirrorModel.project" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ByDMirrorModel.code_list" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ByDMirrorModel.ReportGL" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

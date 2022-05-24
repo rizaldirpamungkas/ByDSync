@@ -78,21 +78,28 @@ namespace ByDSync.Controllers
                 bool statParse;
                 DateTime date;
                 int index = 0;
+                string tanggal;
                 string id = "GL-";
 
                 foreach (JObject data in jsonEnumerableData)
                 {
                     gen = new gen_ledger();
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_CreationDate").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_CreationDate").ToString();
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         gen.created_date = date;
+                    }
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_LaChangeDate").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_LaChangeDate").ToString();
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         gen.changed_date = date;
+                    }
 
                     gen.jour_id = data.Value<JToken>("C_AccDocUuid").ToString();
                     gen.jour_item_id = data.Value<JToken>("C_AccDocItUuid").ToString();
@@ -120,10 +127,13 @@ namespace ByDSync.Controllers
 
                     gen.project_id = projectId;
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_PostingDate").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_PostingDate").ToString(); ;
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         gen.post_date = date;
+                    }
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amtcomp").ToString(), out num);
 

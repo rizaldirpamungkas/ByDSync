@@ -80,7 +80,6 @@ namespace ByDSync.Controllers
                 List<project> projects = new List<project>();
 
                 project project;
-                decimal num;
                 bool statParse, onHold;
                 DateTime date;
                 int index = 0;

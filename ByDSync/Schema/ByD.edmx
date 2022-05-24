@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ByDMirrorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="code_list">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="typeCode" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="gen_ledger">
           <Key>
             <PropertyRef Name="_uid" />
@@ -89,11 +97,43 @@
           <Property Name="risk_level" Type="nvarchar" MaxLength="20" />
           <Property Name="onhold" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReportGL">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Posting Date" Type="date" />
+          <Property Name="Journal ID" Type="nvarchar" MaxLength="12" />
+          <Property Name="GL Account" Type="nvarchar" MaxLength="15" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Dr/Cr" Type="varchar" MaxLength="6" />
+          <Property Name="Profit Center" Type="nvarchar" MaxLength="50" />
+          <Property Name="Project ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Custom Code 3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Funding Source 1" Type="nvarchar" MaxLength="151" />
+        </EntityType>
         <EntityContainer Name="ByDMirrorModelStoreContainer">
+          <EntitySet Name="code_list" EntityType="Self.code_list" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gen_ledger" EntityType="Self.gen_ledger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="journal_entries" EntityType="Self.journal_entries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="profit_center" EntityType="Self.profit_center" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportGL" EntityType="Self.ReportGL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReportGL].[_uid] AS [_uid], 
+    [ReportGL].[Posting Date] AS [Posting Date], 
+    [ReportGL].[Journal ID] AS [Journal ID], 
+    [ReportGL].[GL Account] AS [GL Account], 
+    [ReportGL].[Amount] AS [Amount], 
+    [ReportGL].[Dr/Cr] AS [Dr/Cr], 
+    [ReportGL].[Profit Center] AS [Profit Center], 
+    [ReportGL].[Project ID] AS [Project ID], 
+    [ReportGL].[Custom Code 3] AS [Custom Code 3], 
+    [ReportGL].[Funding Source 1] AS [Funding Source 1]
+    FROM [dbo].[ReportGL] AS [ReportGL]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -188,7 +228,32 @@
           <EntitySet Name="journal_entries" EntityType="Self.journal_entries" />
           <EntitySet Name="profit_center" EntityType="Self.profit_center" />
           <EntitySet Name="projects" EntityType="Self.project" />
+          <EntitySet Name="code_list" EntityType="ByDMirrorModel.code_list" />
+          <EntitySet Name="ReportGLs" EntityType="ByDMirrorModel.ReportGL" />
         </EntityContainer>
+        <EntityType Name="code_list">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="typeCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReportGL">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Posting_Date" Type="DateTime" Precision="0" />
+          <Property Name="Journal_ID" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="GL_Account" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Dr_Cr" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Profit_Center" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Project_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Custom_Code_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Funding_Source_1" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -280,6 +345,31 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="risk_level" ColumnName="risk_level" />
                 <ScalarProperty Name="onhold" ColumnName="onhold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="code_list">
+            <EntityTypeMapping TypeName="ByDMirrorModel.code_list">
+              <MappingFragment StoreEntitySet="code_list">
+                <ScalarProperty Name="typeCode" ColumnName="typeCode" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportGLs">
+            <EntityTypeMapping TypeName="ByDMirrorModel.ReportGL">
+              <MappingFragment StoreEntitySet="ReportGL">
+                <ScalarProperty Name="Funding_Source_1" ColumnName="Funding Source 1" />
+                <ScalarProperty Name="Custom_Code_3" ColumnName="Custom Code 3" />
+                <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
+                <ScalarProperty Name="Profit_Center" ColumnName="Profit Center" />
+                <ScalarProperty Name="Dr_Cr" ColumnName="Dr/Cr" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="GL_Account" ColumnName="GL Account" />
+                <ScalarProperty Name="Journal_ID" ColumnName="Journal ID" />
+                <ScalarProperty Name="Posting_Date" ColumnName="Posting Date" />
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
