@@ -85,6 +85,7 @@ namespace ByDSync.Controllers
                 DateTime date;
                 string tanggal;
                 int index = 0;
+                int div = 1000000;
                 string id = "JE-";
 
                 foreach (JObject data in jsonEnumerableData)
@@ -119,17 +120,17 @@ namespace ByDSync.Controllers
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amtcomp").ToString(), out num);
 
                     if (statParse)
-                        journal.comp_cur_amt = num;
+                        journal.comp_cur_amt = num / div;
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amtlit").ToString(), out num);
 
                     if (statParse)
-                        journal.item_cur_amt = num;
+                        journal.item_cur_amt = num / div;
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amttra").ToString(), out num);
 
                     if (statParse)
-                        journal.tran_cur_amt = num;
+                        journal.tran_cur_amt = num / div;
 
                     journal.C_uid = id + index.ToString("D8");
 

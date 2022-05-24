@@ -1,17 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using ByDSync.Schema;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Web;
 
 namespace ByDSync.Controllers
 {
+    public class glModel {
+
+        [DisplayName("Post Date")]
+        public DateTime postDate { get; set; }
+        [DisplayName("G/L Account")]
+        public string glAccount { get; set; }
+        [DisplayName("Amount")]
+        public decimal amount { get; set; }
+        [DisplayName("Debit/Credit")]
+        public string debitCredit { get; set; }
+        [DisplayName("Funding Source")]
+        public string fundingSource { get; set; }
+    }
+
     public class ReportGLController : Controller
     {
         private ByDMirrorEntities db = new ByDMirrorEntities();
@@ -42,16 +60,46 @@ namespace ByDSync.Controllers
         {
             return View();
         }
-        
+
+        public List<glModel> reportGLs()
+        {
+            List<glModel> reportGLs = new List<glModel>();
+
+            reportGLs = (from x in db.ReportGLs select new glModel {
+                postDate = (DateTime)x.Posting_Date,
+                glAccount = x.GL_Account,
+                amount = (decimal)x.Amount,
+                debitCredit = x.Dr_Cr,
+                fundingSource = x.Funding_Source_1
+            }).ToList();
+
+            return reportGLs; 
+        }
+
         public void Report()
         {
-            ReportDocument cryRpt = new ReportDocument();
-            cryRpt.Load(Server.MapPath("Reports/GenLedger.rpt"));
-            CrystalReportViewer reportViewer = new CrystalReportViewer();
+            GridView gv = new GridView();
 
-            reportViewer.ReportSource = cryRpt;
+            gv.DataSource = reportGLs();
+            gv.DataBind();
 
-            //return View();
+            string fileName = DateTime.Now.ToString("dd-MM-yyyy") + "-JCLEC-GL-Report.xls";
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename="+fileName);
+
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+
+            gv.RenderControl(objHtmlTextWriter);
+
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
         }
 
         // POST: ReportGL/Create

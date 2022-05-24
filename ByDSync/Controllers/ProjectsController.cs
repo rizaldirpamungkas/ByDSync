@@ -82,6 +82,7 @@ namespace ByDSync.Controllers
                 project project;
                 bool statParse, onHold;
                 DateTime date;
+                string tanggal;
                 int index = 0;
                 string id = "PJ-";
 
@@ -116,15 +117,23 @@ namespace ByDSync.Controllers
                     if(statParse)
                         project.onhold = Convert.ToInt16(onHold);
 
-                    statParse = DateTime.TryParse(data.Value<JToken>("C_ProjAEndDat").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+                    tanggal = data.Value<JToken>("C_ProjAEndDat").ToString();
 
-                    if (statParse)
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         project.projActEndDate = date;
+                    }
 
                     statParse = DateTime.TryParse(data.Value<JToken>("C_ProjAStDat").ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
 
-                    if (statParse)
+                    tanggal = data.Value<JToken>("C_ProjAStDat").ToString();
+
+                    if (tanggal != "")
+                    {
+                        date = DateTime.Parse(tanggal);
                         project.projActStaDate = date;
+                    }
 
                     project.C_uid = id + index.ToString("D8");
 

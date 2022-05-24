@@ -135,25 +135,27 @@ namespace ByDSync.Controllers
                         gen.post_date = date;
                     }
 
+                    int div = 1000000;
+
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amtcomp").ToString(), out num);
 
                     if (statParse)
-                        gen.comp_cur_amt = num;
+                        gen.comp_cur_amt = num/div;
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amtlit").ToString(), out num);
 
                     if (statParse)
-                        gen.item_cur_amt = num;
+                        gen.item_cur_amt = num/div;
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_Amttra").ToString(), out num);
 
                     if (statParse)
-                        gen.tran_cur_amt = num;
+                        gen.tran_cur_amt = num/div;
 
                     statParse = decimal.TryParse(data.Value<JToken>("K_ValQuantity").ToString(), out num);
 
                     if (statParse)
-                        gen.val_qty_unt = num;
+                        gen.val_qty_unt = num/div;
 
                     gen.C_uid = id + index.ToString("D8");
 
