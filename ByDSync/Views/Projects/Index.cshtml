@@ -7,7 +7,6 @@
 <h2>Projects</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
     @Html.ActionLink("Sync Data", "Synchronize")
 </p>
 <table class="table">
@@ -57,7 +56,6 @@
         <th>
             @Html.DisplayNameFor(model => model.onhold)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -106,11 +104,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.onhold)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.C_uid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.C_uid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.C_uid })
         </td>
     </tr>
 }

@@ -20,12 +20,12 @@ namespace ByDSync.Controllers
 
         [DisplayName("Post Date")]
         public DateTime postDate { get; set; }
+        [DisplayName("Journal Entry ID")]
+        public string journalId { get; set; }
         [DisplayName("G/L Account")]
         public string glAccount { get; set; }
         [DisplayName("Amount")]
         public decimal amount { get; set; }
-        [DisplayName("Debit/Credit")]
-        public string debitCredit { get; set; }
         [DisplayName("Funding Source")]
         public string fundingSource { get; set; }
     }
@@ -66,10 +66,10 @@ namespace ByDSync.Controllers
             List<glModel> reportGLs = new List<glModel>();
 
             reportGLs = (from x in db.ReportGLs select new glModel {
-                postDate = (DateTime)x.Posting_Date,
+                postDate = ((DateTime)x.Posting_Date),
+                journalId = x.Journal_ID,
                 glAccount = x.GL_Account,
                 amount = (decimal)x.Amount,
-                debitCredit = x.Dr_Cr,
                 fundingSource = x.Funding_Source_1
             }).ToList();
 

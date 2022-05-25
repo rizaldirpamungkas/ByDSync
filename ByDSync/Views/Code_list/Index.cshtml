@@ -7,7 +7,6 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
     @Html.ActionLink("Synchronize Custom Code 3", "SynchronizeCC3")
 </p>
 <table class="table">
@@ -18,7 +17,6 @@
         <th>
             @Html.DisplayNameFor(model => model.typeCode)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -28,11 +26,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.typeCode)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.code }) |
-            @Html.ActionLink("Details", "Details", new { id=item.code }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.code })
         </td>
     </tr>
 }

@@ -24,9 +24,6 @@
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dr_Cr)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Profit_Center)
             </th>
             <th>
@@ -58,9 +55,6 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Dr_Cr)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Profit_Center)
                 </td>
                 <td>
@@ -78,15 +72,36 @@
 
 </table>
 
-
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('#tab').DataTable({
             columnDefs: [
                 {
                     targets: 3,
-                    render: $.fn.dataTable.render.number('.', ',', 0, 'Rp. ')
+                    render: function (data, type, row, meta) {
+                        if (type === 'display') {
+                            if (!data.toString().includes("-")) {
+                                return 'Rp. ' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                            }
+                            else {
+                                return 'Rp. (' + data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace("-","") + ")";
+                            }
+                        }
+
+                        return data;
+                    }
+                },
+                {
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        if (type === 'display') {
+                            if (data.toString() != "") {
+                                return data.replace("00:00:00", "");
+                            }
+                        }
+
+                        return data;
+                    }
                 }
             ]
         });
