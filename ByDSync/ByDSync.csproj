@@ -249,7 +249,9 @@
     <Compile Include="Controllers\Journal_entriesController.cs" />
     <Compile Include="Controllers\Profit_centerController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ProjectTaskController.cs" />
     <Compile Include="Controllers\ReportGLController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -292,7 +294,13 @@
     <Compile Include="Schema\project.cs">
       <DependentUpon>ByD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Schema\project_task.cs">
+      <DependentUpon>ByD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Schema\ReportGL.cs">
+      <DependentUpon>ByD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Schema\supplier.cs">
       <DependentUpon>ByD.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -622,6 +630,19 @@
     <Content Include="Views\ReportGL\Details.cshtml" />
     <Content Include="Views\ReportGL\Edit.cshtml" />
     <Content Include="Views\ReportGL\Index.cshtml" />
+    <Content Include="Views\Code_list\SynchronizeCC1.cshtml" />
+    <Content Include="Views\Suppliers\Create.cshtml" />
+    <Content Include="Views\Suppliers\Delete.cshtml" />
+    <Content Include="Views\Suppliers\Details.cshtml" />
+    <Content Include="Views\Suppliers\Edit.cshtml" />
+    <Content Include="Views\Suppliers\Index.cshtml" />
+    <Content Include="Views\Suppliers\Synchronize.cshtml" />
+    <Content Include="Views\ProjectTask\Create.cshtml" />
+    <Content Include="Views\ProjectTask\Delete.cshtml" />
+    <Content Include="Views\ProjectTask\Details.cshtml" />
+    <Content Include="Views\ProjectTask\Edit.cshtml" />
+    <Content Include="Views\ProjectTask\Index.cshtml" />
+    <Content Include="Views\ProjectTask\Synchronize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

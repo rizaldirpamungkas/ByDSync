@@ -50,7 +50,7 @@ namespace ByDSync.Controllers
             Parameters param = new Parameters();
             Utils utils = new Utils();
 
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE " + param.tableName["CustomCode3"]);
+            db.Database.ExecuteSqlCommand("DELETE FROM " + param.tableName["CustomCode3"] + " WHERE typeCode = 'CustomCode3'");
 
             using (var client = new HttpClient())
             {
@@ -87,6 +87,62 @@ namespace ByDSync.Controllers
                     code.code = data.Value<JToken>("Code").ToString(); ;
                     code.description = data.Value<JToken>("Description").ToString(); ;
                     code.typeCode = "CustomCode3";
+
+                    codes.Add(code);
+                }
+
+                db.code_list.AddRange(codes);
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //Add by Hdk 25-05-2022
+        public ActionResult SynchronizeCC1()
+        {
+            Parameters param = new Parameters();
+            Utils utils = new Utils();
+
+            // db.Database.ExecuteSqlCommand("TRUNCATE TABLE " + param.tableName["CustomCode3"]);
+            db.Database.ExecuteSqlCommand("DELETE FROM" + " " + param.tableName["CustomCode1"] + " " + "where typeCode = 'CustomCode1'");
+
+            using (var client = new HttpClient())
+            {
+                var byteArray = Encoding.ASCII.GetBytes(param.securityWorkcenter["Username"] + ":" + param.securityWorkcenter["Password"]);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+
+                //HTTP GET
+                var responseTask = client.GetAsync(param.uriAPI["CustomCode1"]);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (!result.IsSuccessStatusCode)
+                {
+                    ViewBag.JSON = "404";
+                    return View();
+                }
+
+                var message = result.Content.ReadAsStringAsync();
+                message.Wait();
+
+                string jsonRaw = message.Result;
+                ViewBag.JSON = jsonRaw;
+                JArray jsonEnumerableData = utils.parseJson(jsonRaw);
+
+                List<code_list> codes = new List<code_list>();
+
+                code_list code;
+
+                foreach (JObject data in jsonEnumerableData)
+                {
+                    code = new code_list();
+
+                    code.code = data.Value<JToken>("Code").ToString(); ;
+                    code.description = data.Value<JToken>("Description").ToString(); ;
+                    code.typeCode = "CustomCode1";
 
                     codes.Add(code);
                 }

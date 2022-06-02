@@ -31,5 +31,7 @@ namespace ByDSync.Schema
         public virtual DbSet<project> projects { get; set; }
         public virtual DbSet<code_list> code_list { get; set; }
         public virtual DbSet<ReportGL> ReportGLs { get; set; }
+        public virtual DbSet<project_task> project_task { get; set; }
+        public virtual DbSet<supplier> suppliers { get; set; }
     }
 }

@@ -11,28 +11,26 @@ namespace ByDSync.Schema
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class ReportGL
     {
         public string C_uid { get; set; }
-        [DisplayName("Posting Date")]
         public Nullable<System.DateTime> Posting_Date { get; set; }
-        [DisplayName("Journal ID")]
         public string Journal_ID { get; set; }
-        [DisplayName("GL Account")]
         public string GL_Account { get; set; }
-        [DisplayName("Amount")]
         public Nullable<decimal> Amount { get; set; }
-        [DisplayName("Debit/Credit")]
         public string Dr_Cr { get; set; }
-        [DisplayName("Profit Center ID")]
         public string Profit_Center { get; set; }
-        [DisplayName("Project ID")]
         public string Project_ID { get; set; }
-        [DisplayName("Custom Code 3")]
         public string Custom_Code_3 { get; set; }
-        [DisplayName("Funding Source")]
         public string Funding_Source_1 { get; set; }
+        public string GL_Account_Name { get; set; }
+        public string Account_Type { get; set; }
+        public string Department_No_ { get; set; }
+        public string Department_Name { get; set; }
+        public string Project_Name { get; set; }
+        public string Supplier_Name { get; set; }
+        public string Document_Source_Type { get; set; }
+        public string Description { get; set; }
     }
 }

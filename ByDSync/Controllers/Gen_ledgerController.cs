@@ -114,7 +114,16 @@ namespace ByDSync.Controllers
                     gen.fiscal_year = int.Parse(data.Value<JToken>("C_Fiscyear").ToString());
                     gen.gl_acct = data.Value<JToken>("C_Glacct").ToString();
                     gen.gl_acct_type = data.Value<JToken>("C_GlacctTc").ToString();
-                    
+                    gen.item_description = data.Value<JToken>("C_Oedpartner").ToString();
+                    gen.source_type = data.Value<JToken>("C_Accdoctype").ToString();
+                    gen.bus_part_id = data.Value<JToken>("C_BusPartUuid").ToString();
+
+                    string accNameRaw = data.Value<JToken>("to_Glacct").ToString();
+                    JObject toGlAccount = accNameRaw != "" ? JObject.Parse(accNameRaw) : null;
+                    string accountName = toGlAccount != null ? toGlAccount.Value<JToken>("T_Description").ToString() : "";
+
+                    gen.gl_act_name = accountName;
+
                     string profitCenterRaw = data.Value<JToken>("to_ProfitctrUuid").ToString();
                     JObject toProfitCenter = profitCenterRaw != "" ? JObject.Parse(profitCenterRaw) : null;
                     string profitCenter = toProfitCenter != null ? toProfitCenter.Value<JToken>("C_Prftctrid").ToString() : "";

@@ -24,8 +24,24 @@ namespace ByDSync.Controllers
         public string journalId { get; set; }
         [DisplayName("G/L Account")]
         public string glAccount { get; set; }
+        [DisplayName("G/L Account Name")]
+        public string glAccountName { get; set; }
+        [DisplayName("G/L Account Type")]
+        public string glAccountType { get; set; }
+        [DisplayName("Description")]
+        public string glDescription { get; set; }
         [DisplayName("Amount")]
         public decimal amount { get; set; }
+        [DisplayName("Dept No.")]
+        public string deptNo { get; set; }
+        [DisplayName("Dept Name")]
+        public string deptName { get; set; }
+        [DisplayName("Project ID")]
+        public string projectID { get; set; }
+        [DisplayName("Project Name")]
+        public string projectName { get; set; }
+        [DisplayName("Customers/Vendors Name")]
+        public string vendorName { get; set; }
         [DisplayName("Funding Source")]
         public string fundingSource { get; set; }
     }
@@ -69,7 +85,15 @@ namespace ByDSync.Controllers
                 postDate = ((DateTime)x.Posting_Date),
                 journalId = x.Journal_ID,
                 glAccount = x.GL_Account,
+                glAccountName = x.GL_Account_Name,
+                glAccountType = x.Account_Type,
+                glDescription = x.Description,
                 amount = (decimal)x.Amount,
+                deptNo = x.Department_No_,
+                deptName = x.Department_Name,
+                projectID = x.Project_ID,
+                projectName = x.Project_Name,
+                vendorName = x.Supplier_Name,
                 fundingSource = x.Funding_Source_1
             }).ToList();
 

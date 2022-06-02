@@ -29,5 +29,6 @@ namespace ByDSync.Schema
         public Nullable<decimal> item_cur_amt { get; set; }
         public Nullable<decimal> tran_cur_amt { get; set; }
         public string jour_number { get; set; }
+        public string item_desc { get; set; }
     }
 }

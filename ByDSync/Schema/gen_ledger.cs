@@ -38,5 +38,9 @@ namespace ByDSync.Schema
         public Nullable<decimal> item_cur_amt { get; set; }
         public Nullable<decimal> tran_cur_amt { get; set; }
         public Nullable<decimal> val_qty_unt { get; set; }
+        public string gl_act_name { get; set; }
+        public string bus_part_id { get; set; }
+        public string item_description { get; set; }
+        public string source_type { get; set; }
     }
 }

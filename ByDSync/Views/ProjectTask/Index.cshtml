@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ByDSync.Schema.project_task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Sync Data", "Synchronize")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.created_on)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changed_on)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_uid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_resp_unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proj_resp_unit)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.changed_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_uid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_resp_unit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proj_resp_unit)
+        </td>
+    </tr>
+}
+
+</table>

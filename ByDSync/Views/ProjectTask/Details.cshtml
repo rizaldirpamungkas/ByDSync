@@ -1,0 +1,74 @@
+﻿@model ByDSync.Schema.project_task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>project_task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.created_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.changed_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.changed_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.task_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.task_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project_uid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_uid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.task_resp_unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.task_resp_unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proj_resp_unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proj_resp_unit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.C_uid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,10 +8,11 @@
         <EntityType Name="code_list">
           <Key>
             <PropertyRef Name="code" />
+            <PropertyRef Name="typeCode" />
           </Key>
           <Property Name="code" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="typeCode" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="100" />
-          <Property Name="typeCode" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="gen_ledger">
           <Key>
@@ -41,6 +42,10 @@
           <Property Name="item_cur_amt" Type="decimal" Precision="18" Scale="0" />
           <Property Name="tran_cur_amt" Type="decimal" Precision="18" Scale="0" />
           <Property Name="val_qty_unt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="gl_act_name" Type="nvarchar" MaxLength="200" />
+          <Property Name="bus_part_id" Type="nvarchar" MaxLength="100" />
+          <Property Name="item_description" Type="nvarchar" MaxLength="100" />
+          <Property Name="source_type" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="journal_entries">
           <Key>
@@ -61,6 +66,7 @@
           <Property Name="item_cur_amt" Type="decimal" Precision="18" Scale="0" />
           <Property Name="tran_cur_amt" Type="decimal" Precision="18" Scale="0" />
           <Property Name="jour_number" Type="nvarchar" MaxLength="100" />
+          <Property Name="item_desc" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="profit_center">
           <Key>
@@ -97,6 +103,40 @@
           <Property Name="risk_level" Type="nvarchar" MaxLength="20" />
           <Property Name="onhold" Type="int" />
         </EntityType>
+        <EntityType Name="project_task">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="created_on" Type="date" />
+          <Property Name="changed_on" Type="date" />
+          <Property Name="task_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="project_uid" Type="nvarchar" MaxLength="100" />
+          <Property Name="project_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="task_resp_unit" Type="nvarchar" MaxLength="100" />
+          <Property Name="proj_resp_unit" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="_uid" />
+          </Key>
+          <Property Name="_uid" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="created_on" Type="date" />
+          <Property Name="changed_on" Type="date" />
+          <Property Name="supplier_id" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="supplier_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="supplier_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_adr" Type="nvarchar" MaxLength="200" />
+          <Property Name="supplier_pobox" Type="nvarchar" MaxLength="20" />
+          <Property Name="supplier_postcode" Type="nvarchar" MaxLength="20" />
+          <Property Name="supplier_city" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_state" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_country" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_ind_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_ind_sys" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="supplier_street" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReportGL">
@@ -107,10 +147,18 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="Posting Date" Type="date" />
           <Property Name="Journal ID" Type="nvarchar" MaxLength="12" />
           <Property Name="GL Account" Type="nvarchar" MaxLength="15" />
+          <Property Name="GL Account Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Account Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Dr/Cr" Type="varchar" MaxLength="6" />
+          <Property Name="Department No." Type="char" MaxLength="7" />
+          <Property Name="Department Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Profit Center" Type="nvarchar" MaxLength="50" />
           <Property Name="Project ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Project Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Supplier Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Document Source Type" Type="nvarchar" MaxLength="150" />
           <Property Name="Custom Code 3" Type="nvarchar" MaxLength="50" />
           <Property Name="Funding Source 1" Type="nvarchar" MaxLength="151" />
         </EntityType>
@@ -120,16 +168,26 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySet Name="journal_entries" EntityType="Self.journal_entries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="profit_center" EntityType="Self.profit_center" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="project_task" EntityType="Self.project_task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportGL" EntityType="Self.ReportGL" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ReportGL].[_uid] AS [_uid], 
     [ReportGL].[Posting Date] AS [Posting Date], 
     [ReportGL].[Journal ID] AS [Journal ID], 
     [ReportGL].[GL Account] AS [GL Account], 
+    [ReportGL].[GL Account Name] AS [GL Account Name], 
+    [ReportGL].[Account Type] AS [Account Type], 
+    [ReportGL].[Description] AS [Description], 
     [ReportGL].[Amount] AS [Amount], 
     [ReportGL].[Dr/Cr] AS [Dr/Cr], 
+    [ReportGL].[Department No.] AS [Department No.], 
+    [ReportGL].[Department Name] AS [Department Name], 
     [ReportGL].[Profit Center] AS [Profit Center], 
     [ReportGL].[Project ID] AS [Project ID], 
+    [ReportGL].[Project Name] AS [Project Name], 
+    [ReportGL].[Supplier Name] AS [Supplier Name], 
+    [ReportGL].[Document Source Type] AS [Document Source Type], 
     [ReportGL].[Custom Code 3] AS [Custom Code 3], 
     [ReportGL].[Funding Source 1] AS [Funding Source 1]
     FROM [dbo].[ReportGL] AS [ReportGL]</DefiningQuery>
@@ -167,6 +225,10 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="item_cur_amt" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="tran_cur_amt" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="val_qty_unt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="gl_act_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="bus_part_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="item_description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="source_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="journal_entries">
           <Key>
@@ -187,6 +249,7 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="item_cur_amt" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="tran_cur_amt" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="jour_number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="item_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="profit_center">
           <Key>
@@ -230,14 +293,17 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySet Name="projects" EntityType="Self.project" />
           <EntitySet Name="code_list" EntityType="ByDMirrorModel.code_list" />
           <EntitySet Name="ReportGLs" EntityType="ByDMirrorModel.ReportGL" />
+          <EntitySet Name="project_task" EntityType="ByDMirrorModel.project_task" />
+          <EntitySet Name="suppliers" EntityType="ByDMirrorModel.supplier" />
         </EntityContainer>
         <EntityType Name="code_list">
           <Key>
             <PropertyRef Name="code" />
+			<PropertyRef Name="typeCode" />
           </Key>
           <Property Name="code" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="typeCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="typeCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="ReportGL">
           <Key>
@@ -253,6 +319,48 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="Project_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Custom_Code_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Funding_Source_1" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="GL_Account_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Account_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Department_No_" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="Department_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Project_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Source_Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="project_task">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="created_on" Type="DateTime" Precision="0" />
+          <Property Name="changed_on" Type="DateTime" Precision="0" />
+          <Property Name="task_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="project_uid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="project_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="task_resp_unit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="proj_resp_unit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="C_uid" />
+          </Key>
+          <Property Name="C_uid" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="created_on" Type="DateTime" Precision="0" />
+          <Property Name="changed_on" Type="DateTime" Precision="0" />
+          <Property Name="supplier_id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_adr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_pobox" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_postcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_street" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_ind_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_ind_sys" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -263,6 +371,10 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySetMapping Name="gen_ledger">
             <EntityTypeMapping TypeName="ByDMirrorModel.gen_ledger">
               <MappingFragment StoreEntitySet="gen_ledger">
+                <ScalarProperty Name="source_type" ColumnName="source_type" />
+                <ScalarProperty Name="item_description" ColumnName="item_description" />
+                <ScalarProperty Name="bus_part_id" ColumnName="bus_part_id" />
+                <ScalarProperty Name="gl_act_name" ColumnName="gl_act_name" />
                 <ScalarProperty Name="C_uid" ColumnName="_uid" />
                 <ScalarProperty Name="created_date" ColumnName="created_date" />
                 <ScalarProperty Name="changed_date" ColumnName="changed_date" />
@@ -293,6 +405,7 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySetMapping Name="journal_entries">
             <EntityTypeMapping TypeName="ByDMirrorModel.journal_entries">
               <MappingFragment StoreEntitySet="journal_entries">
+                <ScalarProperty Name="item_desc" ColumnName="item_desc" />
                 <ScalarProperty Name="jour_number" ColumnName="jour_number" />
                 <ScalarProperty Name="C_uid" ColumnName="_uid" />
                 <ScalarProperty Name="gl_act" ColumnName="gl_act" />
@@ -360,6 +473,14 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySetMapping Name="ReportGLs">
             <EntityTypeMapping TypeName="ByDMirrorModel.ReportGL">
               <MappingFragment StoreEntitySet="ReportGL">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Document_Source_Type" ColumnName="Document Source Type" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier Name" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project Name" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department Name" />
+                <ScalarProperty Name="Department_No_" ColumnName="Department No." />
+                <ScalarProperty Name="Account_Type" ColumnName="Account Type" />
+                <ScalarProperty Name="GL_Account_Name" ColumnName="GL Account Name" />
                 <ScalarProperty Name="Funding_Source_1" ColumnName="Funding Source 1" />
                 <ScalarProperty Name="Custom_Code_3" ColumnName="Custom Code 3" />
                 <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
@@ -369,6 +490,42 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
                 <ScalarProperty Name="GL_Account" ColumnName="GL Account" />
                 <ScalarProperty Name="Journal_ID" ColumnName="Journal ID" />
                 <ScalarProperty Name="Posting_Date" ColumnName="Posting Date" />
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="project_task">
+            <EntityTypeMapping TypeName="ByDMirrorModel.project_task">
+              <MappingFragment StoreEntitySet="project_task">
+                <ScalarProperty Name="proj_resp_unit" ColumnName="proj_resp_unit" />
+                <ScalarProperty Name="task_resp_unit" ColumnName="task_resp_unit" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_uid" ColumnName="project_uid" />
+                <ScalarProperty Name="task_id" ColumnName="task_id" />
+                <ScalarProperty Name="changed_on" ColumnName="changed_on" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="C_uid" ColumnName="_uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="suppliers">
+            <EntityTypeMapping TypeName="ByDMirrorModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="supplier_phone" ColumnName="supplier_phone" />
+                <ScalarProperty Name="supplier_ind_sys" ColumnName="supplier_ind_sys" />
+                <ScalarProperty Name="supplier_ind_code" ColumnName="supplier_ind_code" />
+                <ScalarProperty Name="supplier_country" ColumnName="supplier_country" />
+                <ScalarProperty Name="supplier_state" ColumnName="supplier_state" />
+                <ScalarProperty Name="supplier_city" ColumnName="supplier_city" />
+                <ScalarProperty Name="supplier_street" ColumnName="supplier_street" />
+                <ScalarProperty Name="supplier_postcode" ColumnName="supplier_postcode" />
+                <ScalarProperty Name="supplier_pobox" ColumnName="supplier_pobox" />
+                <ScalarProperty Name="supplier_adr" ColumnName="supplier_adr" />
+                <ScalarProperty Name="supplier_email" ColumnName="supplier_email" />
+                <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="changed_on" ColumnName="changed_on" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
                 <ScalarProperty Name="C_uid" ColumnName="_uid" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,136 @@
+﻿@model ByDSync.Schema.supplier
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>supplier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.created_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.changed_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.changed_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_adr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_adr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_pobox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_pobox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_postcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_ind_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_ind_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_ind_sys)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_ind_sys)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

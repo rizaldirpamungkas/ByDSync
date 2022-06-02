@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ByDSync.Schema.supplier>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Sync Data", "Synchronize")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.created_on)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changed_on)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_adr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_pobox)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_postcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_ind_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_ind_sys)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.changed_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_adr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_pobox)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_postcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_ind_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier_ind_sys)
+        </td>
+    </tr>
+}
+
+</table>
