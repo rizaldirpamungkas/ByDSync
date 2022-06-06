@@ -251,18 +251,23 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProjectTaskController.cs" />
     <Compile Include="Controllers\ReportGLController.cs" />
+    <Compile Include="Controllers\ReportGrandController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Parameters.cs" />
     <Compile Include="App_Data\Utils.cs" />
+    <Compile Include="Models\EnumContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\GenLedger.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GenLedger.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Schema\account_type.cs">
+      <DependentUpon>ByD.tt</DependentUpon>
     </Compile>
     <Compile Include="Schema\ByD.Context.cs">
       <AutoGen>True</AutoGen>
@@ -280,6 +285,12 @@
       <DependentUpon>ByD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Schema\code_list.cs">
+      <DependentUpon>ByD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Schema\doc_source_type.cs">
+      <DependentUpon>ByD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Schema\enum_container.cs">
       <DependentUpon>ByD.tt</DependentUpon>
     </Compile>
     <Compile Include="Schema\gen_ledger.cs">
@@ -643,10 +654,15 @@
     <Content Include="Views\ProjectTask\Edit.cshtml" />
     <Content Include="Views\ProjectTask\Index.cshtml" />
     <Content Include="Views\ProjectTask\Synchronize.cshtml" />
+    <Content Include="Views\ReportGrand\Create.cshtml" />
+    <Content Include="Views\ReportGrand\Delete.cshtml" />
+    <Content Include="Views\ReportGrand\Details.cshtml" />
+    <Content Include="Views\ReportGrand\Edit.cshtml" />
+    <Content Include="Views\ReportGrand\Index.cshtml" />
+    <Content Include="Views\Code_list\SynchronizeCC2.cshtml" />
+    <Content Include="Views\ReportGrand\Filter.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

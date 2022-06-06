@@ -1,0 +1,269 @@
+﻿@using ByDSync.Schema
+@model IEnumerable<ByDSync.Schema.ReportGL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    th, td {
+        border: 7px solid transparent;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    /* Style the tab */
+    .tab {
+        float: left;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 10%;
+        height: 300px;
+    }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current "tab button" class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        float: left;
+        padding: 0px 12px;
+        border: 1px solid #ccc;
+        width: 90%;
+        border-left: none;
+    }
+
+    #filter {
+        padding: 15px;
+        margin-inline: 150px;
+    }
+
+    #filter button{
+        margin-inline-start: 10px;
+    }
+</style>
+
+<div class="tab">
+    <button class="tablinks" onclick="openReport(event, 'Grand')">Report Grand</button>
+    <button class="tablinks" onclick="openReport(event, 'Total')">Report Total</button>
+    <button class="tablinks" onclick="openReport(event, 'Coa')">Report Detail COA</button>
+</div>
+
+@{ 
+    var stepClosing = ViewData["ClosingStep"] as IEnumerable<enum_container>;
+}
+
+<div id="filter">
+    @using (Html.BeginForm("Filter", "ReportGrand", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Label("From")
+        <input type="date" name="begin" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2050-12-31">
+        @Html.Label("To")
+        <input type="date" name="end" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2050-12-31">
+        @Html.Label("Closing Step")
+        <select name="closingStep" id="cars">
+            @foreach (var val in stepClosing)
+            {
+                <option value="@val.enumNumber">@val.enumDescription</option>
+            }
+        </select>
+        <button type="submit" onclick="location.href = '@Url.Action("Filter", "ReportGrand")'">Filter Report</button>
+    }
+</div>
+
+<div id="Grand" class="tabcontent">
+    <h2>Report Grand</h2>
+    @{
+        var groupGrand = Model.GroupBy(x => x.Funding_Source_1, (key, g) => new { FundingSource = key, SumGrand = g.Sum(x => x.Amount) });
+        //var detailGrand = Model.ToList();
+    }
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var itemGrand in groupGrand)
+            {
+                string fundingGrand = itemGrand.FundingSource != null ? itemGrand.FundingSource : "N/A";
+
+                <tr>
+                    <td colspan="4"><h4>Grand :  @fundingGrand</h4></td>
+                </tr>
+
+                var detailGrand = (from r in Model
+                                   where r.Funding_Source_1 == itemGrand.FundingSource
+                                   group r by r.GL_Account into newDetail
+                                   orderby newDetail.Key
+                                   select newDetail);
+
+                string sumGrand = itemGrand.SumGrand >= 0 ? "Rp. " + ((decimal)itemGrand.SumGrand).ToString("##,#") + ",00" : "Rp. " + ((decimal)itemGrand.SumGrand).ToString("##,#").Replace('-', '(') + ",00)";
+
+                foreach (var detail in detailGrand)
+                {
+                    var sumAmount = detail.Sum(x => x.Amount);
+
+                    string amountString = sumAmount >= 0 ? "Rp. " + ((decimal)sumAmount).ToString("##,#") + ",00" : "Rp. " + ((decimal)sumAmount).ToString("##,#").Replace('-', '(') + ",00)";
+
+                    <tr>
+                        <td></td>
+                        <td><b>@detail.Key</b></td>
+                        <td>@detail.First().GL_Account_Name.ToUpper()</td>
+                        <td>@amountString</td>
+                    </tr>
+                }
+
+                <tr>
+                    <td colspan="4" align="right">@sumGrand</td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+
+<div id="Total" class="tabcontent">
+    <h2>Total</h2>
+
+    @{
+        var groupAccount = (from r in Model group r by r.GL_Account into account select account);
+
+        decimal sumAll = (decimal)Model.Sum(x => x.Amount);
+        string sumAllString = sumAll >= 0 ? "Rp. " + sumAll.ToString("#,##") + ",00" : "Rp. " + sumAll.ToString("#,##").Replace('-', '(') + ",00)";
+
+        <table>
+
+            @foreach (var akun in groupAccount)
+            {
+                decimal summa = (decimal)akun.Sum(x => x.Amount);
+                var sumAccount = summa >= 0 ? "Rp. " + summa.ToString("#,##") + ",00" : "Rp. " + summa.ToString("#,##").Replace('-', '(') + ",00)";
+
+                <tr>
+                    <td><b>@akun.Key</b></td>
+                    <td>@akun.First().GL_Account_Name.ToUpper() </td>
+                    <td>@sumAccount</td>
+                </tr>
+
+            }
+
+            <tr>
+                <td colspan="3" align="right">
+                    @sumAllString
+                </td>
+            </tr>
+
+        </table>
+    }
+</div>
+
+<div id="Coa" class="tabcontent">
+    <h3>Detail COA</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var groupAcct = (from r in Model group r by r.GL_Account into newAccount select newAccount);
+
+                foreach (var act in groupAcct)
+                {
+                    var groupFund = (from r in Model where r.GL_Account == act.Key group r by r.Funding_Source_1 into newFund select newFund);
+
+                    <tr>
+                        <td><h4>@act.Key</h4></td>
+                        <td colspan="3"><h4>@act.First().GL_Account_Name.ToUpper()</h4></td>
+                    </tr>
+
+                    foreach (var fund in groupFund)
+                    {
+                        string keyAccount = fund.Key != null ? fund.Key : "N/A";
+
+                        decimal amountDeb = (decimal)fund.Where(x => x.Dr_Cr == "DEBIT").Sum(x => x.Amount);
+                        decimal amountKre = (decimal)fund.Where(x => x.Dr_Cr == "CREDIT").Sum(x => x.Amount);
+
+                        string debit = amountDeb >= 0 ? "Rp. " + amountDeb.ToString("#,##") + ",00" : "Rp. " + amountDeb.ToString("#,##").Replace('-', '(') + ",00)";
+                        string kredit = amountKre >= 0 ? "Rp. " + amountKre.ToString("#,##") + ",00" : "Rp. " + amountKre.ToString("#,##").Replace('-', '(') + ",00)";
+
+                        <tr>
+                            <td></td>
+                            <td>@keyAccount</td>
+                            <td>@debit</td>
+                            <td>@kredit</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    function openReport(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the link that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    openReport(event, 'Grand');
+</script>

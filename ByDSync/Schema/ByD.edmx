@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ByDMirrorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account_type">
+          <Key>
+            <PropertyRef Name="account_type_id" />
+          </Key>
+          <Property Name="account_type_id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="account_type_desc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="code_list">
           <Key>
             <PropertyRef Name="code" />
@@ -13,6 +20,24 @@
           <Property Name="code" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="typeCode" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="doc_source_type">
+          <Key>
+            <PropertyRef Name="source_type" />
+          </Key>
+          <Property Name="source_type" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="source_desc" Type="nvarchar" MaxLength="150" />
+          <Property Name="tipe" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="enum_container">
+          <Key>
+            <PropertyRef Name="enumNumber" />
+            <PropertyRef Name="enumTypeId" />
+          </Key>
+          <Property Name="enumNumber" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="enumDescription" Type="nvarchar" MaxLength="150" />
+          <Property Name="enumTypeId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="enumType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="gen_ledger">
           <Key>
@@ -46,6 +71,7 @@
           <Property Name="bus_part_id" Type="nvarchar" MaxLength="100" />
           <Property Name="item_description" Type="nvarchar" MaxLength="100" />
           <Property Name="source_type" Type="nvarchar" MaxLength="10" />
+          <Property Name="closestep" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="journal_entries">
           <Key>
@@ -159,11 +185,18 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="Project Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Supplier Name" Type="nvarchar" MaxLength="150" />
           <Property Name="Document Source Type" Type="nvarchar" MaxLength="150" />
+          <Property Name="Restricted Code" Type="char" MaxLength="7" />
+          <Property Name="Restricted Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Closing Step Code" Type="nvarchar" MaxLength="5" />
+          <Property Name="Closing Step Description" Type="nvarchar" MaxLength="150" />
           <Property Name="Custom Code 3" Type="nvarchar" MaxLength="50" />
           <Property Name="Funding Source 1" Type="nvarchar" MaxLength="151" />
         </EntityType>
         <EntityContainer Name="ByDMirrorModelStoreContainer">
+          <EntitySet Name="account_type" EntityType="Self.account_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="code_list" EntityType="Self.code_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="doc_source_type" EntityType="Self.doc_source_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="enum_container" EntityType="Self.enum_container" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gen_ledger" EntityType="Self.gen_ledger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="journal_entries" EntityType="Self.journal_entries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="profit_center" EntityType="Self.profit_center" Schema="dbo" store:Type="Tables" />
@@ -188,6 +221,10 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
     [ReportGL].[Project Name] AS [Project Name], 
     [ReportGL].[Supplier Name] AS [Supplier Name], 
     [ReportGL].[Document Source Type] AS [Document Source Type], 
+    [ReportGL].[Restricted Code] AS [Restricted Code], 
+    [ReportGL].[Restricted Name] AS [Restricted Name], 
+    [ReportGL].[Closing Step Code] AS [Closing Step Code], 
+    [ReportGL].[Closing Step Description] AS [Closing Step Description], 
     [ReportGL].[Custom Code 3] AS [Custom Code 3], 
     [ReportGL].[Funding Source 1] AS [Funding Source 1]
     FROM [dbo].[ReportGL] AS [ReportGL]</DefiningQuery>
@@ -229,6 +266,7 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="bus_part_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="item_description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="source_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="closestep" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="journal_entries">
           <Key>
@@ -295,6 +333,9 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySet Name="ReportGLs" EntityType="ByDMirrorModel.ReportGL" />
           <EntitySet Name="project_task" EntityType="ByDMirrorModel.project_task" />
           <EntitySet Name="suppliers" EntityType="ByDMirrorModel.supplier" />
+          <EntitySet Name="account_type" EntityType="ByDMirrorModel.account_type" />
+          <EntitySet Name="doc_source_type" EntityType="ByDMirrorModel.doc_source_type" />
+          <EntitySet Name="enum_container" EntityType="ByDMirrorModel.enum_container" />
         </EntityContainer>
         <EntityType Name="code_list">
           <Key>
@@ -327,6 +368,10 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="Supplier_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Document_Source_Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Restricted_Code" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="Restricted_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Closing_Step_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Closing_Step_Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="project_task">
           <Key>
@@ -362,6 +407,31 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <Property Name="supplier_ind_sys" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="supplier_phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="account_type">
+          <Key>
+            <PropertyRef Name="account_type_id" />
+          </Key>
+          <Property Name="account_type_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="account_type_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="doc_source_type">
+          <Key>
+            <PropertyRef Name="source_type" />
+          </Key>
+          <Property Name="source_type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="source_desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="tipe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="enum_container">
+          <Key>
+            <PropertyRef Name="enumNumber" />
+            <PropertyRef Name="enumTypeId" />
+          </Key>
+          <Property Name="enumNumber" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="enumDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="enumTypeId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="enumType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -371,6 +441,7 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySetMapping Name="gen_ledger">
             <EntityTypeMapping TypeName="ByDMirrorModel.gen_ledger">
               <MappingFragment StoreEntitySet="gen_ledger">
+                <ScalarProperty Name="closestep" ColumnName="closestep" />
                 <ScalarProperty Name="source_type" ColumnName="source_type" />
                 <ScalarProperty Name="item_description" ColumnName="item_description" />
                 <ScalarProperty Name="bus_part_id" ColumnName="bus_part_id" />
@@ -473,6 +544,10 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
           <EntitySetMapping Name="ReportGLs">
             <EntityTypeMapping TypeName="ByDMirrorModel.ReportGL">
               <MappingFragment StoreEntitySet="ReportGL">
+                <ScalarProperty Name="Closing_Step_Description" ColumnName="Closing Step Description" />
+                <ScalarProperty Name="Closing_Step_Code" ColumnName="Closing Step Code" />
+                <ScalarProperty Name="Restricted_Name" ColumnName="Restricted Name" />
+                <ScalarProperty Name="Restricted_Code" ColumnName="Restricted Code" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Document_Source_Type" ColumnName="Document Source Type" />
                 <ScalarProperty Name="Supplier_Name" ColumnName="Supplier Name" />
@@ -527,6 +602,33 @@ warning 6002: The table/view 'ByDMirror.dbo.ReportGL' does not have a primary ke
                 <ScalarProperty Name="changed_on" ColumnName="changed_on" />
                 <ScalarProperty Name="created_on" ColumnName="created_on" />
                 <ScalarProperty Name="C_uid" ColumnName="_uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="account_type">
+            <EntityTypeMapping TypeName="ByDMirrorModel.account_type">
+              <MappingFragment StoreEntitySet="account_type">
+                <ScalarProperty Name="account_type_desc" ColumnName="account_type_desc" />
+                <ScalarProperty Name="account_type_id" ColumnName="account_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doc_source_type">
+            <EntityTypeMapping TypeName="ByDMirrorModel.doc_source_type">
+              <MappingFragment StoreEntitySet="doc_source_type">
+                <ScalarProperty Name="tipe" ColumnName="tipe" />
+                <ScalarProperty Name="source_desc" ColumnName="source_desc" />
+                <ScalarProperty Name="source_type" ColumnName="source_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="enum_container">
+            <EntityTypeMapping TypeName="ByDMirrorModel.enum_container">
+              <MappingFragment StoreEntitySet="enum_container">
+                <ScalarProperty Name="enumType" ColumnName="enumType" />
+                <ScalarProperty Name="enumTypeId" ColumnName="enumTypeId" />
+                <ScalarProperty Name="enumDescription" ColumnName="enumDescription" />
+                <ScalarProperty Name="enumNumber" ColumnName="enumNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

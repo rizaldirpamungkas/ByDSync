@@ -33,5 +33,8 @@ namespace ByDSync.Schema
         public virtual DbSet<ReportGL> ReportGLs { get; set; }
         public virtual DbSet<project_task> project_task { get; set; }
         public virtual DbSet<supplier> suppliers { get; set; }
+        public virtual DbSet<account_type> account_type { get; set; }
+        public virtual DbSet<doc_source_type> doc_source_type { get; set; }
+        public virtual DbSet<enum_container> enum_container { get; set; }
     }
 }

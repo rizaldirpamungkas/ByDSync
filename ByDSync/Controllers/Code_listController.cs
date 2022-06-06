@@ -154,6 +154,61 @@ namespace ByDSync.Controllers
 
             return RedirectToAction("Index");
         }
+        
+        public ActionResult SynchronizeCC2()
+        {
+            Parameters param = new Parameters();
+            Utils utils = new Utils();
+
+            // db.Database.ExecuteSqlCommand("TRUNCATE TABLE " + param.tableName["CustomCode3"]);
+            db.Database.ExecuteSqlCommand("DELETE FROM" + " " + param.tableName["CustomCode2"] + " " + "where typeCode = 'CustomCode2'");
+
+            using (var client = new HttpClient())
+            {
+                var byteArray = Encoding.ASCII.GetBytes(param.securityWorkcenter["Username"] + ":" + param.securityWorkcenter["Password"]);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+
+                //HTTP GET
+                var responseTask = client.GetAsync(param.uriAPI["CustomCode2"]);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (!result.IsSuccessStatusCode)
+                {
+                    ViewBag.JSON = "404";
+                    return View();
+                }
+
+                var message = result.Content.ReadAsStringAsync();
+                message.Wait();
+
+                string jsonRaw = message.Result;
+                ViewBag.JSON = jsonRaw;
+                JArray jsonEnumerableData = utils.parseJson(jsonRaw);
+
+                List<code_list> codes = new List<code_list>();
+
+                code_list code;
+
+                foreach (JObject data in jsonEnumerableData)
+                {
+                    code = new code_list();
+
+                    code.code = data.Value<JToken>("Code").ToString(); ;
+                    code.description = data.Value<JToken>("Description").ToString(); ;
+                    code.typeCode = "CustomCode1";
+
+                    codes.Add(code);
+                }
+
+                db.code_list.AddRange(codes);
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
 
         // POST: Code_list/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

@@ -75,6 +75,7 @@ namespace ByDSync.Controllers
 
                 gen_ledger gen;
                 decimal num;
+                string numString;
                 bool statParse;
                 DateTime date;
                 int index = 0;
@@ -117,6 +118,7 @@ namespace ByDSync.Controllers
                     gen.item_description = data.Value<JToken>("C_Oedpartner").ToString();
                     gen.source_type = data.Value<JToken>("C_Accdoctype").ToString();
                     gen.bus_part_id = data.Value<JToken>("C_BusPartUuid").ToString();
+                    gen.closestep = data.Value<JToken>("C_Closestep").ToString();
 
                     string accNameRaw = data.Value<JToken>("to_Glacct").ToString();
                     JObject toGlAccount = accNameRaw != "" ? JObject.Parse(accNameRaw) : null;
@@ -144,27 +146,43 @@ namespace ByDSync.Controllers
                         gen.post_date = date;
                     }
 
-                    int div = 1000000;
+                    int div = 1;
 
-                    statParse = decimal.TryParse(data.Value<JToken>("K_Amtcomp").ToString(), out num);
+                    numString = data.Value<JToken>("K_Amtcomp").ToString();
+                    numString = numString.Substring(0,numString.IndexOf("."));
 
-                    if (statParse)
-                        gen.comp_cur_amt = num/div;
+                    if (numString != "")
+                    {
+                        num = decimal.Parse(numString, CultureInfo.InvariantCulture);
+                        gen.comp_cur_amt = num / div;
+                    }
 
-                    statParse = decimal.TryParse(data.Value<JToken>("K_Amtlit").ToString(), out num);
+                    numString = data.Value<JToken>("K_Amtlit").ToString();
+                    numString = numString.Substring(0, numString.IndexOf("."));
 
-                    if (statParse)
-                        gen.item_cur_amt = num/div;
+                    if (numString != "")
+                    {
+                        num = decimal.Parse(numString, CultureInfo.InvariantCulture);
+                        gen.item_cur_amt = num / div;
+                    }
 
-                    statParse = decimal.TryParse(data.Value<JToken>("K_Amttra").ToString(), out num);
+                    numString = data.Value<JToken>("K_Amttra").ToString();
+                    numString = numString.Substring(0, numString.IndexOf("."));
 
-                    if (statParse)
-                        gen.tran_cur_amt = num/div;
+                    if (numString != "")
+                    {
+                        num = decimal.Parse(numString, CultureInfo.InvariantCulture);
+                        gen.tran_cur_amt = num / div;
+                    }
 
-                    statParse = decimal.TryParse(data.Value<JToken>("K_ValQuantity").ToString(), out num);
+                    numString = data.Value<JToken>("K_ValQuantity").ToString();
+                    numString = numString.Substring(0, numString.IndexOf("."));
 
-                    if (statParse)
-                        gen.val_qty_unt = num/div;
+                    if (numString != "")
+                    {
+                        num = decimal.Parse(numString, CultureInfo.InvariantCulture);
+                        gen.val_qty_unt = num / div;
+                    }
 
                     gen.C_uid = id + index.ToString("D8");
 

@@ -32,5 +32,9 @@ namespace ByDSync.Schema
         public string Supplier_Name { get; set; }
         public string Document_Source_Type { get; set; }
         public string Description { get; set; }
+        public string Restricted_Code { get; set; }
+        public string Restricted_Name { get; set; }
+        public string Closing_Step_Code { get; set; }
+        public string Closing_Step_Description { get; set; }
     }
 }

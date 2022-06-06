@@ -15,6 +15,9 @@
                 Posting Date
             </th>
             <th>
+                Journal Source
+            </th>
+            <th>
                 Journal ID
             </th>
             <th>
@@ -45,20 +48,26 @@
                 Project Name
             </th>
             <th>
+                Funding Source
+            </th>
+            <th>
                 Vendor/Customer Name
             </th>
             <th>
-                Funding Source
+                Restricted/Unrestricted
             </th>
         </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model)
-        {
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Posting_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Document_Source_Type)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Journal_ID)
@@ -91,10 +100,13 @@
                     @Html.DisplayFor(modelItem => item.Project_Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Funding_Source_1)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Supplier_Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Funding_Source_1)
+                    @Html.DisplayFor(modelItem => item.Restricted_Name)
                 </td>
             </tr>
         }
@@ -107,7 +119,7 @@
         $('#tab').DataTable({
             columnDefs: [
                 {
-                    targets: 6,
+                    targets: 7,
                     render: function (data, type, row, meta) {
                         if (type === 'display') {
                             if (!data.toString().includes("-")) {
@@ -126,7 +138,8 @@
                     render: function (data, type, row, meta) {
                         if (type === 'display') {
                             if (data.toString() != "") {
-                                return data.replace("00:00:00", "");
+                                let textDate = data.split(" ");
+                                return textDate[0];
                             }
                         }
 

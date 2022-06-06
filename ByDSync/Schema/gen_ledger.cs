@@ -42,5 +42,6 @@ namespace ByDSync.Schema
         public string bus_part_id { get; set; }
         public string item_description { get; set; }
         public string source_type { get; set; }
+        public string closestep { get; set; }
     }
 }
