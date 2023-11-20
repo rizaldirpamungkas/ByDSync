@@ -1,0 +1,180 @@
+﻿@page
+@model TaxIdnProject.Pages.EFaktur.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>EFakturContainer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EFakturContainer.ID" />
+            <div class="form-group">
+                <label asp-for="EFakturContainer.KD_JENIS_TRANSAKSI" class="control-label"></label>
+                <input asp-for="EFakturContainer.KD_JENIS_TRANSAKSI" class="form-control" />
+                <span asp-validation-for="EFakturContainer.KD_JENIS_TRANSAKSI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.FG_PENGGANTI" class="control-label"></label>
+                <input asp-for="EFakturContainer.FG_PENGGANTI" class="form-control" />
+                <span asp-validation-for="EFakturContainer.FG_PENGGANTI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.NOMOR_FAKTUR" class="control-label"></label>
+                <input asp-for="EFakturContainer.NOMOR_FAKTUR" class="form-control" />
+                <span asp-validation-for="EFakturContainer.NOMOR_FAKTUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.MASA_PAJAK" class="control-label"></label>
+                <input asp-for="EFakturContainer.MASA_PAJAK" class="form-control" />
+                <span asp-validation-for="EFakturContainer.MASA_PAJAK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.TAHUN_PAJAK" class="control-label"></label>
+                <input asp-for="EFakturContainer.TAHUN_PAJAK" class="form-control" />
+                <span asp-validation-for="EFakturContainer.TAHUN_PAJAK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.TANGGAL_FAKTUR" class="control-label"></label>
+                <input asp-for="EFakturContainer.TANGGAL_FAKTUR" class="form-control" />
+                <span asp-validation-for="EFakturContainer.TANGGAL_FAKTUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.NPWP" class="control-label"></label>
+                <input asp-for="EFakturContainer.NPWP" class="form-control" />
+                <span asp-validation-for="EFakturContainer.NPWP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.NAMA" class="control-label"></label>
+                <input asp-for="EFakturContainer.NAMA" class="form-control" />
+                <span asp-validation-for="EFakturContainer.NAMA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.ALAMAT_LENGKAP" class="control-label"></label>
+                <input asp-for="EFakturContainer.ALAMAT_LENGKAP" class="form-control" />
+                <span asp-validation-for="EFakturContainer.ALAMAT_LENGKAP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.JUMLAH_DPP" class="control-label"></label>
+                <input asp-for="EFakturContainer.JUMLAH_DPP" class="form-control" />
+                <span asp-validation-for="EFakturContainer.JUMLAH_DPP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.JUMLAH_PPN" class="control-label"></label>
+                <input asp-for="EFakturContainer.JUMLAH_PPN" class="form-control" />
+                <span asp-validation-for="EFakturContainer.JUMLAH_PPN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.JUMLAH_PPNBM" class="control-label"></label>
+                <input asp-for="EFakturContainer.JUMLAH_PPNBM" class="form-control" />
+                <span asp-validation-for="EFakturContainer.JUMLAH_PPNBM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.ID_KETERANGAN_TAMBAHAN" class="control-label"></label>
+                <input asp-for="EFakturContainer.ID_KETERANGAN_TAMBAHAN" class="form-control" />
+                <span asp-validation-for="EFakturContainer.ID_KETERANGAN_TAMBAHAN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.FG_UANG_MUKA" class="control-label"></label>
+                <input asp-for="EFakturContainer.FG_UANG_MUKA" class="form-control" />
+                <span asp-validation-for="EFakturContainer.FG_UANG_MUKA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.UANG_MUKA_DPP" class="control-label"></label>
+                <input asp-for="EFakturContainer.UANG_MUKA_DPP" class="form-control" />
+                <span asp-validation-for="EFakturContainer.UANG_MUKA_DPP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.UANG_MUKA_PPN" class="control-label"></label>
+                <input asp-for="EFakturContainer.UANG_MUKA_PPN" class="form-control" />
+                <span asp-validation-for="EFakturContainer.UANG_MUKA_PPN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.UANG_MUKA_PPNBM" class="control-label"></label>
+                <input asp-for="EFakturContainer.UANG_MUKA_PPNBM" class="form-control" />
+                <span asp-validation-for="EFakturContainer.UANG_MUKA_PPNBM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.REFERENSI" class="control-label"></label>
+                <input asp-for="EFakturContainer.REFERENSI" class="form-control" />
+                <span asp-validation-for="EFakturContainer.REFERENSI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.KODE_DOKUMEN_PENDUKUNG" class="control-label"></label>
+                <input asp-for="EFakturContainer.KODE_DOKUMEN_PENDUKUNG" class="form-control" />
+                <span asp-validation-for="EFakturContainer.KODE_DOKUMEN_PENDUKUNG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.OF" class="control-label"></label>
+                <input asp-for="EFakturContainer.OF" class="form-control" />
+                <span asp-validation-for="EFakturContainer.OF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.KODE_OBJEK" class="control-label"></label>
+                <input asp-for="EFakturContainer.KODE_OBJEK" class="form-control" />
+                <span asp-validation-for="EFakturContainer.KODE_OBJEK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.NAMA_OBJEK" class="control-label"></label>
+                <input asp-for="EFakturContainer.NAMA_OBJEK" class="form-control" />
+                <span asp-validation-for="EFakturContainer.NAMA_OBJEK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.HARGA_SATUAN" class="control-label"></label>
+                <input asp-for="EFakturContainer.HARGA_SATUAN" class="form-control" />
+                <span asp-validation-for="EFakturContainer.HARGA_SATUAN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.JUMLAH_BARANG" class="control-label"></label>
+                <input asp-for="EFakturContainer.JUMLAH_BARANG" class="form-control" />
+                <span asp-validation-for="EFakturContainer.JUMLAH_BARANG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.HARGA_TOTAL" class="control-label"></label>
+                <input asp-for="EFakturContainer.HARGA_TOTAL" class="form-control" />
+                <span asp-validation-for="EFakturContainer.HARGA_TOTAL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.DISKON" class="control-label"></label>
+                <input asp-for="EFakturContainer.DISKON" class="form-control" />
+                <span asp-validation-for="EFakturContainer.DISKON" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.DPP" class="control-label"></label>
+                <input asp-for="EFakturContainer.DPP" class="form-control" />
+                <span asp-validation-for="EFakturContainer.DPP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.PPN" class="control-label"></label>
+                <input asp-for="EFakturContainer.PPN" class="form-control" />
+                <span asp-validation-for="EFakturContainer.PPN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.TARIF_PPNBM" class="control-label"></label>
+                <input asp-for="EFakturContainer.TARIF_PPNBM" class="form-control" />
+                <span asp-validation-for="EFakturContainer.TARIF_PPNBM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFakturContainer.PPNBM" class="control-label"></label>
+                <input asp-for="EFakturContainer.PPNBM" class="form-control" />
+                <span asp-validation-for="EFakturContainer.PPNBM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

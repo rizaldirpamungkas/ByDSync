@@ -1,0 +1,257 @@
+﻿@page
+@model TaxIdnProject.Pages.EFaktur.IndexModel
+
+@{
+    ViewData["Title"] = "Efaktur Masukan";
+}
+
+<h1>EFaktur Masukan Staging</h1>
+
+@if (ViewData["WarningMessage"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewData["WarningMessage"]");
+        }
+    </script>
+}
+
+<form asp-page-handler="Data" method="post">
+    <div id="exampleModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filter Supplier Invoice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <div class="form-group">
+                                <td><label>Dari Tanggal</label></td>
+                                <td>:</td>
+                                <td><input id="dariTanggal" name="dariTanggal" type="date" /></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label>Sampai Tanggal</label></td>
+                    <td>:</td>
+                                <td><input id="sampaiTanggal" name="sampaiTanggal" type="date" /></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label>Kode Supplier</label></td>
+                                <td>:</td>
+                                <td><input id="kodeSupplier" name="kodeSupplier" type="text" value="" /></td>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Get List</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <script type="text/javascript">
+        
+    </script>
+}
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Get List</button>
+    <a class="btn btn-primary" asp-page-handler="CSV">Generate CSV</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].KD_JENIS_TRANSAKSI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].FG_PENGGANTI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].NOMOR_FAKTUR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].MASA_PAJAK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].TANGGAL_FAKTUR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].NPWP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].NAMA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].ALAMAT_LENGKAP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].JUMLAH_DPP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].JUMLAH_PPN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].JUMLAH_PPNBM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].ID_KETERANGAN_TAMBAHAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].FG_UANG_MUKA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].UANG_MUKA_DPP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].UANG_MUKA_PPN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].UANG_MUKA_PPNBM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].REFERENSI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].KODE_DOKUMEN_PENDUKUNG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].KODE_OBJEK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].NAMA_OBJEK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].HARGA_SATUAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].JUMLAH_BARANG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].HARGA_TOTAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].DISKON)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].DPP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].PPN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].TARIF_PPNBM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EFakturContainer[0].PPNBM)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.EFakturContainer != null)
+        {
+            @foreach (var item in Model.EFakturContainer)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KD_JENIS_TRANSAKSI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FG_PENGGANTI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMOR_FAKTUR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MASA_PAJAK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TANGGAL_FAKTUR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NPWP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ALAMAT_LENGKAP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JUMLAH_DPP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JUMLAH_PPN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JUMLAH_PPNBM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID_KETERANGAN_TAMBAHAN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FG_UANG_MUKA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UANG_MUKA_DPP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UANG_MUKA_PPN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UANG_MUKA_PPNBM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.REFERENSI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KODE_DOKUMEN_PENDUKUNG)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KODE_OBJEK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMA_OBJEK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HARGA_SATUAN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JUMLAH_BARANG)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HARGA_TOTAL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DISKON)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DPP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PPN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TARIF_PPNBM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PPNBM)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

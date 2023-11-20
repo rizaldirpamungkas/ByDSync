@@ -1,0 +1,202 @@
+﻿@page
+@model TaxIdnProject.Pages.EFaktur.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EFakturContainer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.KD_JENIS_TRANSAKSI)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.KD_JENIS_TRANSAKSI)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.FG_PENGGANTI)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.FG_PENGGANTI)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.NOMOR_FAKTUR)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.NOMOR_FAKTUR)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.MASA_PAJAK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.MASA_PAJAK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.TAHUN_PAJAK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.TAHUN_PAJAK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.TANGGAL_FAKTUR)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.TANGGAL_FAKTUR)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.NPWP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.NPWP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.NAMA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.NAMA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.ALAMAT_LENGKAP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.ALAMAT_LENGKAP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.JUMLAH_DPP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.JUMLAH_DPP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.JUMLAH_PPN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.JUMLAH_PPN)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.JUMLAH_PPNBM)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.JUMLAH_PPNBM)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.ID_KETERANGAN_TAMBAHAN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.ID_KETERANGAN_TAMBAHAN)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.FG_UANG_MUKA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.FG_UANG_MUKA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.UANG_MUKA_DPP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.UANG_MUKA_DPP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.UANG_MUKA_PPN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.UANG_MUKA_PPN)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.UANG_MUKA_PPNBM)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.UANG_MUKA_PPNBM)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.REFERENSI)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.REFERENSI)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.KODE_DOKUMEN_PENDUKUNG)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.KODE_DOKUMEN_PENDUKUNG)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.OF)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.OF)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.KODE_OBJEK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.KODE_OBJEK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.NAMA_OBJEK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.NAMA_OBJEK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.HARGA_SATUAN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.HARGA_SATUAN)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.JUMLAH_BARANG)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.JUMLAH_BARANG)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.HARGA_TOTAL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.HARGA_TOTAL)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.DISKON)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.DISKON)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.DPP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.DPP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.PPN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.PPN)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.TARIF_PPNBM)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.TARIF_PPNBM)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EFakturContainer.PPNBM)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EFakturContainer.PPNBM)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="EFakturContainer.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

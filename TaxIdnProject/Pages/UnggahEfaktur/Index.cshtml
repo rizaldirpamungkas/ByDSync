@@ -1,0 +1,21 @@
+﻿@page
+@model TaxIdnProject.Pages.UnggahEfaktur.IndexModel
+
+
+@{
+    ViewData["Title"] = "Unggah E-Faktur";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+﻿<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <label>Select File</label>
+        <input type="file" name="fileUpload" accept=".csv" />
+    </div>
+    <div class="row" style="padding-top: 10px;">
+        <div class="col-3">
+            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />
+        </div>
+    </div>
+</form>
